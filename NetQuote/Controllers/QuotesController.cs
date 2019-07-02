@@ -146,6 +146,18 @@ namespace NetQuote.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> Random()
+        {
+            int numberOfQuotes = _context.Quotes.Count();
+
+            Random rnd = new Random();
+            var randomId = rnd.Next(1, numberOfQuotes);
+
+            var randomQuote = await _context.Quotes.FirstOrDefaultAsync(x => x.Id == randomId);
+
+            return View(randomQuote);
+        }
+
         private bool QuoteExists(int id)
         {
             return _context.Quotes.Any(e => e.Id == id);

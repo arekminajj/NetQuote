@@ -12,7 +12,7 @@ namespace NetQuote.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Quotes", new { area = "" });
         }
 
         public IActionResult Privacy()
