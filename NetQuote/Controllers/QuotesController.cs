@@ -53,10 +53,12 @@ namespace NetQuote.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,Created")] Quote quote)
+        public async Task<IActionResult> Create([Bind("Id,Content")] Quote quote)
         {
             if (ModelState.IsValid)
             {
+                quote.Created = DateTime.Now;
+
                 _context.Add(quote);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
